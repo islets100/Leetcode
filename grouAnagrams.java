@@ -31,7 +31,7 @@ class GroupAnagramsSolution {
             // getOrDefault 的意思是：如果有 "aet" 这个组，就把它拿出来；
             // 如果柜子里还没有这个组，就当场新建一个空名单 (new ArrayList)。
             List<String> list = map.getOrDefault(key, new ArrayList<String>());
-            
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!注意new不能创建一个抽象实例，所以这里必是ArrayList或者HashMap
             // e. 把当前还没排序的原始单词 (str) 加进名单里
             list.add(str);
             
