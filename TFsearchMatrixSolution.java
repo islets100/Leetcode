@@ -9,7 +9,7 @@ import java.util.Scanner;
  * 给你一个整数 target ，如果 target 在矩阵中，返回 true ；否则，返回 false 。
  * 要求：时间复杂度必须为 O(log(m * n))。
  */
-public class searchMatrixSolution {
+public class TFsearchMatrixSolution {
 
     /**
      * 核心算法：将二维矩阵逻辑上视为一维数组进行二分查找
@@ -17,7 +17,7 @@ public class searchMatrixSolution {
      * @param target 目标值
      * @return 是否找到目标值
      */
-    public boolean searchMatrix(int[][] matrix, int target) {
+    public boolean TFsearchMatrix(int[][] matrix, int target) {
         // 1. 获取矩阵的行数 m 和列数 n
         int m = matrix.length;
         int n = matrix[0].length;
@@ -59,7 +59,7 @@ public class searchMatrixSolution {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        searchMatrixSolution sol = new searchMatrixSolution();
+        TFsearchMatrixSolution sol = new TFsearchMatrixSolution();
 
         // 读取行数和列数
         while (sc.hasNextInt()) {
@@ -78,7 +78,7 @@ public class searchMatrixSolution {
             int target = sc.nextInt();
             
             // 执行算法并输出结果
-            System.out.println(sol.searchMatrix(matrix, target));
+            System.out.println(sol.TFsearchMatrix(matrix, target));
         }
         sc.close();
     }
