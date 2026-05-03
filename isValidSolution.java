@@ -1,5 +1,6 @@
 import java.util.*;
 
+//  # #  
 /**
  * 题号：LeetCode 20
  * 题目：有效括号 (Valid Parentheses)
@@ -16,15 +17,18 @@ public class isValidSolution {
 
     // 1. 定义静态常量 Map，用于存储括号的配对关系
     // Key 为左括号，Value 为对应的右括号
-    private static final Map<Character, Character> map = new HashMap<Character, Character>() {{
-        put('(', ')');
-        put('[', ']');
-        put('{', '}');
-        put('?', '?'); // 占位符配对，用于逻辑保底
-    }};
+    private static final Map<Character, Character> map = new HashMap<Character, Character>() {
+        {
+            put('(', ')');
+            put('[', ']');
+            put('{', '}');
+            put('?', '?'); // 占位符配对，用于逻辑保底
+        }
+    };
 
     /**
      * 算法实现：辅助栈法
+     * 
      * @param s 输入字符串
      * @return 是否为有效括号
      */
@@ -37,7 +41,7 @@ public class isValidSolution {
 
         // 3. 创建 Deque 作为栈使用（ArrayDeque 性能优于 Stack 类和 LinkedList）
         Deque<Character> stack = new ArrayDeque<>();
-        
+
         // 4. 关键点：在栈底压入一个占位符 '?'
         // 这样在遇到第一个右括号执行 pop 时，栈永远不会为空，且匹配必然失败（除非右括号也是 '?'）。
         stack.push('?');
@@ -77,8 +81,9 @@ public class isValidSolution {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             // 如果输入为空行，则跳过
-            if (input.trim().isEmpty()) continue;
-            
+            if (input.trim().isEmpty())
+                continue;
+
             // 执行并输出结果
             System.out.println(sol.isValid(input));
         }

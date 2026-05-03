@@ -12,32 +12,35 @@ public class searchSolution {
 
     /**
      * 核心算法：二分查找旋转数组
-     * @param nums 旋转后的排序数组
+     * 
+     * @param nums   旋转后的排序数组
      * @param target 目标值
      * @return 目标值所在的索引，若不存在则返回 -1
      */
     public int search(int[] nums, int target) {
         // 1. 获取数组长度
         int n = nums.length;
-        
+
         // 2. 边界处理：如果数组为空，直接返回 -1
-        if (n == 0) return -1;
-        
+        if (n == 0)
+            return -1;
+
         // 3. 初始化左右指针
         int l = 0, r = n - 1;
-        
+
         // 4. 进入二分查找循环
         while (l <= r) {
             // 5. 计算中点，采用防溢出且位运算更快的写法
             int mid = ((r - l) >> 1) + l;
-            
+
             // 6. 如果中点值正好等于目标值，直接返回索引
-            if (nums[mid] == target) return mid;
-            
+            if (nums[mid] == target)
+                return mid;
+
             // 7. 【关键判断】：判断左半部分 [l, mid] 是否是有序的
             // 如果左边界值 <= 中点值，说明旋转点不在左边，左边是升序的
             if (nums[l] <= nums[mid]) {
-                
+
                 // 8. 在左边有序的情况下，检查 target 是否在 [nums[l], nums[mid]) 范围内
                 if (nums[l] <= target && target < nums[mid]) {
                     // 9. 如果在范围内，说明目标在左侧，收缩右边界
@@ -46,11 +49,11 @@ public class searchSolution {
                     // 10. 如果不在范围内，说明目标肯定在右半部分（哪怕右边是乱的）
                     l = mid + 1;
                 }
-                
-            } 
+
+            }
             // 11. 如果 nums[l] > nums[mid]，说明旋转点在左半部分，那么右半部分 [mid, r] 必然是有序的
             else {
-                
+
                 // 12. 在右边有序的情况下，检查 target 是否在 (nums[mid], nums[r]] 范围内
                 if (nums[mid] < target && target <= nums[r]) {
                     // 13. 如果在范围内，说明目标在右侧，收缩左边界
@@ -61,10 +64,16 @@ public class searchSolution {
                 }
             }
         }
-        
+
         // 15. 循环结束仍未找到，返回 -1
         return -1;
     }
+
+    // 关于 mid 的边界：永远不需要带等号（即 target < nums[mid] 或 target >
+    // nums[mid]），因为等于的情况已经被上面那行杀掉了。
+
+    // 关于 l 和 r 的边界：必须要带等号。因为 target
+    // 完全有可能刚好就是最左边或最右边的那个数。
 
     /**
      * ACM 模式主函数：处理标准输入输出
@@ -89,7 +98,7 @@ public class searchSolution {
             // 执行搜索并输出结果
             System.out.println(sol.search(nums, target));
         }
-        
+
         // 关闭资源
         sc.close();
     }

@@ -14,9 +14,18 @@ public class reverseKGroup {
     private static class ListNode {
         int val;
         ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 
     public static void main(String[] args) {
@@ -26,7 +35,7 @@ public class reverseKGroup {
         while (sc.hasNextInt()) {
             int n = sc.nextInt();
             int k = sc.nextInt();
-            
+
             // 调用你指定的 buildList(sc, n) 形式
             ListNode head = buildList(sc, n);
 
@@ -52,7 +61,7 @@ public class reverseKGroup {
         while (head != null) {
             // tail 初始指向 pre，我们要向后走 k 步找到这一组的结尾
             ListNode tail = pre;
-            
+
             // 1. 查看剩余部分长度是否大于等于 k
             for (int i = 0; i < k; ++i) {
                 tail = tail.next;
@@ -61,10 +70,10 @@ public class reverseKGroup {
                     return hair.next;
                 }
             }
-            
+
             // 2. 记录下一组的开头（nex），防止翻转这一组后找不到后面的路
             ListNode nex = tail.next;
-            
+
             // 3. 翻转这一组 [head, tail]
             // reverse 数组：index 0 是翻转后的新头，index 1 是翻转后的新尾
             ListNode[] reverse = myReverse(head, tail);
@@ -76,7 +85,7 @@ public class reverseKGroup {
             pre.next = head;
             // 让这一组的新结尾指向下一组的开头
             tail.next = nex;
-            
+
             // 5. 准备处理下一组：pre 挪到这一组的末尾，head 指向下一组开头
             pre = tail;
             head = tail.next;
@@ -93,7 +102,7 @@ public class reverseKGroup {
         // 这样在翻转第一个节点时，它的 next 就会直接连上下一组的开头
         ListNode prev = tail.next;
         ListNode p = head;
-        
+
         // 当 prev 还没有变成 tail 的时候，说明这一组还没翻转完
         while (prev != tail) {
             // 1. 临时保存下一个要翻转的节点
@@ -104,9 +113,9 @@ public class reverseKGroup {
             prev = p;
             p = nex;
         }
-        
+
         // 翻转完成后，原来的 tail 变成了头，原来的 head 变成了尾
-        return new ListNode[]{tail, head};
+        return new ListNode[] { tail, head };
     }
 
     // --- 辅助工具：构建链表 (Scanner + 限制长度 n) ---

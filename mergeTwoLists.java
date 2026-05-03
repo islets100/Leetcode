@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /*
-21. 合并两个有序链表
+21. 合并两个有序链表 ##
 将两个升序链表合并为一个新的 升序 链表并返回。
 新链表是通过拼接给定的两个链表的所有节点组成的。 
 */
@@ -11,14 +11,20 @@ public class mergeTwoLists {
     private static class ListNode {
         int val;
         ListNode next;
-        ListNode() {}
-        ListNode(int val) { this.val = val; }
-        ListNode(int val, ListNode next) { 
-            this.val = val; 
-            this.next = next; 
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
         }
     }
-    
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -51,8 +57,8 @@ public class mergeTwoLists {
         ListNode curr = dummy;
 
         // 3. 当两个链表都不为空时，进行比较
-        while(list1 != null && list2 != null){
-            if(list1.val <= list2.val){
+        while (list1 != null && list2 != null) {
+            if (list1.val <= list2.val) {
                 // 如果 list1 的值小，就把 curr 接到 list1 上
                 curr.next = list1;
                 // list1 往前走一步
