@@ -1,3 +1,4 @@
+
 // 导入处理输入输出、队列和链表的工具类
 import java.util.Scanner;
 import java.util.LinkedList;
@@ -20,12 +21,14 @@ public class isValidBSTSolution {
      * 1. 节点类定义
      */
     static class TreeNode {
-        int val;                // 节点存储的整数值
-        TreeNode left;          // 左子节点引用
-        TreeNode right;         // 右子节点引用
+        int val; // 节点存储的整数值
+        TreeNode left; // 左子节点引用
+        TreeNode right; // 右子节点引用
 
-        TreeNode() {}           // 无参构造
-        TreeNode(int val) {     // 带值的构造
+        TreeNode() {
+        } // 无参构造
+
+        TreeNode(int val) { // 带值的构造
             this.val = val;
         }
     }
@@ -40,6 +43,7 @@ public class isValidBSTSolution {
 
     /**
      * 辅助递归函数：通过上下界约束来验证
+     * 
      * @param node  当前检查的节点
      * @param lower 当前节点必须严格大于的下限
      * @param upper 当前节点必须严格小于的上限
@@ -56,8 +60,8 @@ public class isValidBSTSolution {
         }
 
         // 递归检查左子树（上限变为当前值）和右子树（下限变为当前值）
-        return isValidBST(node.left, lower, node.val) && 
-               isValidBST(node.right, node.val, upper);
+        return isValidBST(node.left, lower, node.val) &&
+                isValidBST(node.right, node.val, upper);
     }
 
     /**
@@ -71,7 +75,8 @@ public class isValidBSTSolution {
         // 循环读取每一行层序序列
         while (sc.hasNextLine()) {
             String line = sc.nextLine().trim();
-            if (line.isEmpty()) continue;
+            if (line.isEmpty())
+                continue;
 
             // 构建二叉树并验证
             TreeNode root = buildTree(line);
@@ -85,7 +90,8 @@ public class isValidBSTSolution {
      */
     private static TreeNode buildTree(String data) {
         String[] nodes = data.split("\\s+");
-        if (nodes[0].equals("null")) return null;
+        if (nodes[0].equals("null"))
+            return null;
 
         TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
         Queue<TreeNode> queue = new LinkedList<>();
