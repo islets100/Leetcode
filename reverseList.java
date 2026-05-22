@@ -1,4 +1,3 @@
-package reverselist;
 
 import java.util.Scanner;
 

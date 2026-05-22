@@ -1,6 +1,5 @@
-package wherehascycle;
-import java.util.Scanner;
 
+import java.util.Scanner;
 
 /*
 142. 环形链表 II
@@ -11,16 +10,19 @@ import java.util.Scanner;
 */
 
 // 1. 定义链表节点
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-}
 
 public class whereHasCycle {
+
+    private static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -28,53 +30,53 @@ public class whereHasCycle {
         // 期望输入格式：
         // 第一行：n (节点个数), pos (环连接的位置，从0开始；-1表示无环)
         // 第二行：n个节点的具体数值
-        //while (sc.hasNextInt()) {
-            int n = sc.nextInt();
-            int pos = sc.nextInt();
+        // while (sc.hasNextInt()) {
+        int n = sc.nextInt();
+        int pos = sc.nextInt();
 
-            if (n == 0) {
-                System.out.println("null");
-                //continue;
+        if (n == 0) {
+            System.out.println("null");
+            // continue;
+        }
+
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+
+        // --- 构造带环链表 ---
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+        ListNode cycleNode = null; // 用于记录环的入口
+        ListNode tail = null; // 用于记录尾节点
+
+        for (int i = 0; i < n; i++) {
+            curr.next = new ListNode(nums[i]);
+            curr = curr.next;
+            if (i == pos) {
+                cycleNode = curr; // 记录下 pos 位置的节点
             }
-
-            int[] nums = new int[n];
-            for (int i = 0; i < n; i++) {
-                nums[i] = sc.nextInt();
+            if (i == n - 1) {
+                tail = curr; // 记录尾部
             }
+        }
 
-            // --- 构造带环链表 ---
-            ListNode dummy = new ListNode(-1);
-            ListNode curr = dummy;
-            ListNode cycleNode = null; // 用于记录环的入口
-            ListNode tail = null;      // 用于记录尾节点
+        // 如果 pos 不是 -1，制造环
+        if (pos != -1 && tail != null) {
+            tail.next = cycleNode;
+        }
 
-            for (int i = 0; i < n; i++) {
-                curr.next = new ListNode(nums[i]);
-                curr = curr.next;
-                if (i == pos) {
-                    cycleNode = curr; // 记录下 pos 位置的节点
-                }
-                if (i == n - 1) {
-                    tail = curr;      // 记录尾部
-                }
-            }
+        // --- 执行算法 ---
+        ListNode result = detectCycleSolution(dummy.next);
 
-            // 如果 pos 不是 -1，制造环
-            if (pos != -1 && tail != null) {
-                tail.next = cycleNode;
-            }
-
-            // --- 执行算法 ---
-            ListNode result = detectCycleSolution(dummy.next);
-
-            // --- 输出结果 ---
-            if (result != null) {
-                // ACM 模式通常要求输出入环节点的数值或索引
-                System.out.println("tail connects to node index " + pos + " with value " + result.val);
-            } else {
-                System.out.println("no cycle");
-            }
-        //}
+        // --- 输出结果 ---
+        if (result != null) {
+            // ACM 模式通常要求输出入环节点的数值或索引
+            System.out.println("tail connects to node index " + pos + " with value " + result.val);
+        } else {
+            System.out.println("no cycle");
+        }
+        // }
         sc.close();
     }
 
@@ -90,8 +92,6 @@ public class whereHasCycle {
         // 阶段一：快慢指针从起点同步出发
         ListNode slow = head;
         ListNode fast = head;
-
-        
 
         while (fast != null && fast.next != null) {
             slow = slow.next;

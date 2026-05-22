@@ -1,6 +1,5 @@
-package hascycle;
-import java.util.Scanner;
 
+import java.util.Scanner;
 
 /*
 141. 环形链表
@@ -11,17 +10,18 @@ import java.util.Scanner;
 如果链表中存在环，则返回 true 。 否则，返回 false 。
 */
 
-// 1. 定义链表节点
-class ListNode {
-    int val;
-    ListNode next;
-    ListNode(int x) {
-        val = x;
-        next = null;
-    }
-}
-
 public class hasCycle {
+    // 1. 定义链表节点
+    private static class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -29,55 +29,54 @@ public class hasCycle {
         // 约定输入格式：
         // 第一行：n (节点个数), pos (环连接的位置，从0开始索引；-1表示无环)
         // 第二行：n个节点的具体数值
-        //while (sc.hasNextInt()) {
-            int n = sc.nextInt();
-            int pos = sc.nextInt();
-            
-            if (n == 0) {
-                System.out.println("false");
-                //continue;
+        // while (sc.hasNextInt()) {
+        int n = sc.nextInt();
+        int pos = sc.nextInt();
+
+        if (n == 0) {
+            System.out.println("false");
+            // continue;
+        }
+
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = sc.nextInt();
+        }
+
+        // --- 构建链表并制造环 ---
+        ListNode dummy = new ListNode(-1);
+        ListNode curr = dummy;
+        ListNode cycleNode = null; // 用来记录环开始的那个节点
+        ListNode tail = null; // 用来记录最后一个节点
+
+        for (int i = 0; i < n; i++) {
+            curr.next = new ListNode(nums[i]);
+            curr = curr.next;
+            if (i == pos) {
+                cycleNode = curr; // 记下第 pos 个节点
             }
-
-            int[] nums = new int[n];
-            for (int i = 0; i < n; i++) {
-                nums[i] = sc.nextInt();
+            if (i == n - 1) {
+                tail = curr; // 记下最后一个节点
             }
+        }
 
-            // --- 构建链表并制造环 ---
-            ListNode dummy = new ListNode(-1);
-            ListNode curr = dummy;
-            ListNode cycleNode = null; // 用来记录环开始的那个节点
-            ListNode tail = null;      // 用来记录最后一个节点
+        // 如果 pos 不是 -1，则把尾巴连到指定节点形成环
+        if (pos != -1 && tail != null) {
+            tail.next = cycleNode;
+        }
 
-            for (int i = 0; i < n; i++) {
-                curr.next = new ListNode(nums[i]);
-                curr = curr.next;
-                if (i == pos) {
-                    cycleNode = curr; // 记下第 pos 个节点
-                }
-                if (i == n - 1) {
-                    tail = curr;      // 记下最后一个节点
-                }
-            }
-
-            // 如果 pos 不是 -1，则把尾巴连到指定节点形成环
-            if (pos != -1 && tail != null) {
-                tail.next = cycleNode;
-            }
-
-            // --- 执行算法 ---
-            hasCycleSolution sol = new hasCycleSolution();
-            System.out.println(sol.hasCycle(dummy.next));
-            sc.close();
-        //}
+        // --- 执行算法 ---
+        hasCycle sol = new hasCycle();
+        System.out.println(sol.hascycle(dummy.next));
+        sc.close();
+        // }
     }
-}
 
-class hasCycleSolution {
     /**
      * 核心算法：快慢指针 (Floyd's Cycle-Finding Algorithm)
      */
-    public boolean hasCycle(ListNode head) {
+
+    public boolean hascycle(ListNode head) {
         // 边界处理：空链表或单节点链表（无自环）肯定没环
         if (head == null || head.next == null) {
             return false;

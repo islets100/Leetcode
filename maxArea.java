@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.io.*;
 
 /*
 11.盛水最多的容器
@@ -14,6 +15,7 @@ import java.util.Scanner;
 
 class maxAreaSolution {
     public int maxArea(int[] height) {
+
         // 1. 初始化
         // i: 左指针，从数组最左边开始 (下标 0)
         // j: 右指针，从数组最右边开始 (下标 长度-1)
