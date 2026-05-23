@@ -1,3 +1,5 @@
+import java.io.BufferedReader;
+import java.io.*;
 import java.util.*;
 
 /**
@@ -7,17 +9,20 @@ import java.util.*;
  * 其中 answer[i] 是指对于第 i 天，下一个更高温度出现在几天后。
  * 如果气温在这之后都不会升高，请在该位置用 0 来代替。
  * * 核心思路：单调栈 (Monotonic Stack)
- * 1. 我们维护一个栈，里面存放的是气温数组的【下标】。
- * 2. 栈内的元素对应的温度必须是【单调递减】的。
- * 3. 遍历到第 i 天时，如果第 i 天的温度比栈顶下标对应的温度高：
- * - 说明找到了栈顶元素“下一个更高温度”。
- * - 弹出栈顶，计算下标差值 (i - prevIndex)，存入结果。
- * 4. 否则，将当前下标 i 入栈。
+ * //0.首先，所有的数的索引都需要入栈
+ * //1.按索引枚举每个数，看当前枚举的数能否解救被困的数（栈顶（先前遍历过的数字））
+ * //2.解救成功，把它从栈顶拿出来，记录解救它的是谁（填充i的距离到ans[prevIndex]中）
+ * //2.继续解救直到无能为力（while轮询）
+ * //3.燃尽了自己跳进井里（push入栈）,等待下一个人解救
+ * //4.回到步骤1
+ * //5.直到枚举结束。
+ * //6.最后一个元素不用考虑，直接用初始化ans时的0.
  */
 public class dailyTemperaturesSolution {
 
     /**
      * 算法实现：单调栈
+     * 
      * @param temperatures 气温数组
      * @return 距离下一次升温的天数数组
      */
@@ -44,7 +49,7 @@ public class dailyTemperaturesSolution {
             while (!stack.isEmpty() && currentTemp > temperatures[stack.peek()]) {
                 // 5. 弹出栈顶那个终于等到回暖的下标
                 int prevIndex = stack.pop();
-                
+
                 // 6. 计算天数差距：当前下标 i 减去 过去那个下标 prevIndex
                 ans[prevIndex] = i - prevIndex;
             }
@@ -62,24 +67,40 @@ public class dailyTemperaturesSolution {
 
     /**
      * ACM 模式主函数：用于在本地或 VS Code 中测试
+     * //
      */
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    // public static void main(String[] args) {
+    // Scanner sc = new Scanner(System.in);
+    // dailyTemperaturesSolution sol = new dailyTemperaturesSolution();
+
+    // System.out.println("请输入数组长度 n 和数组元素（以空格分隔）：");
+    // while (sc.hasNextInt()) {
+    // int n = sc.nextInt();
+    // int[] temperatures = new int[n];
+    // for (int i = 0; i < n; i++) {
+    // temperatures[i] = sc.nextInt();
+    // }
+
+    // int[] result = sol.dailyTemperatures(temperatures);
+
+    // // 格式化输出结果
+    // System.out.println("结果为：" + Arrays.toString(result));
+    // }
+    // sc.close();
+    // }
+
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         dailyTemperaturesSolution sol = new dailyTemperaturesSolution();
 
-        System.out.println("请输入数组长度 n 和数组元素（以空格分隔）：");
-        while (sc.hasNextInt()) {
-            int n = sc.nextInt();
-            int[] temperatures = new int[n];
-            for (int i = 0; i < n; i++) {
-                temperatures[i] = sc.nextInt();
-            }
-
-            int[] result = sol.dailyTemperatures(temperatures);
-            
-            // 格式化输出结果
-            System.out.println("结果为：" + Arrays.toString(result));
+        System.out.println("请输入数组元素（以空格分隔）：");
+        String[] line = br.readLine().split(" ");
+        int n = line.length;
+        int[] nums = new int[n];
+        for (int i = 0; i < n; i++) {
+            nums[i] = Integer.parseInt(line[i]);
         }
-        sc.close();
+        int[] result = sol.dailyTemperatures(nums);
+        System.out.println("结果为：" + Arrays.toString(result));
     }
 }
