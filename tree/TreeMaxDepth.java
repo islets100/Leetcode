@@ -10,7 +10,7 @@ import java.util.*;
 public class  TreeMaxDepth{
 
     // 1. 定义二叉树节点类
-    public static class TreeNode {
+    private static class TreeNode {
         int val; // 节点存储的值
         TreeNode left; // 指向左子节点的指针
         TreeNode right; // 指向右子节点的指针

@@ -9,7 +9,7 @@ import java.util.*;
 public class lowestCommonAncestorSolution {
 
     // 1. 定义二叉树节点类
-    static class TreeNode {
+    private static class TreeNode {
         int val;        // 节点的值
         TreeNode left;  // 指向左孩子的指针
         TreeNode right; // 指向右孩子的指针

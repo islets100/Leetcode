@@ -1,7 +1,7 @@
 // 导入必要的工具类
-import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 /**124.二叉树中的最大路径和
  * 二叉树中的 路径 被定义为一条节点序列，
@@ -16,7 +16,7 @@ public class maxPathSumSolution {
     /**
      * 1. 节点类定义
      */
-    static class TreeNode {
+    private static class TreeNode {
         int val;                // 节点存储的数值
         TreeNode left;          // 左子节点
         TreeNode right;         // 右子节点

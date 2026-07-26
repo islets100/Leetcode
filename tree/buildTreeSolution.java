@@ -1,5 +1,4 @@
 import java.util.*;
-
 /**105.用中序和前序遍历构建二叉树
  * 给定两个整数数组 preorder 和 inorder ，
  * 其中 preorder 是二叉树的先序遍历，
@@ -8,7 +7,7 @@ import java.util.*;
 public class buildTreeSolution {
 
     // 1. 定义二叉树节点类
-    static class TreeNode {
+    private static class TreeNode {
         int val;                // 节点存储的整数值
         TreeNode left;          // 指向左子节点的指针
         TreeNode right;         // 指向右子节点的指针

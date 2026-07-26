@@ -1,9 +1,9 @@
 // 导入处理输入输出和队列的工具包
-import java.util.Scanner;
-import java.util.Queue;
-import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
 
 /*
 108.将有序数组转化为二叉平衡树
@@ -16,7 +16,7 @@ public class sortedArrayToBSTSolution{
     /**
      * 1. 节点类定义
      */
-    static class TreeNode {
+    private static class TreeNode {
         int val;                // 节点值
         TreeNode left;          // 左孩子
         TreeNode right;         // 右孩子

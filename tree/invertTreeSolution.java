@@ -1,9 +1,9 @@
 // 导入处理输入输出、列表、队列和链表的工具包
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.Scanner;
 
 /*
 226.翻转二叉树
@@ -16,7 +16,7 @@ public class invertTreeSolution {
      * 1. 节点的定义
      * 就像造房子需要砖块，二叉树的砖块就是 TreeNode
      */
-    static class TreeNode {
+    private static class TreeNode {
         int val;                // 节点里存的数字
         TreeNode left;          // 指向左边孩子的“手”
         TreeNode right;         // 指向右边孩子的“手”

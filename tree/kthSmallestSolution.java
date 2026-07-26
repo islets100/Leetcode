@@ -10,7 +10,7 @@ public class kthSmallestSolution {
     /**
      * 1. 节点类定义
      */
-    static class TreeNode {
+    private static class TreeNode {
         int val;                // 节点值
         TreeNode left;          // 左孩子
         TreeNode right;         // 右孩子

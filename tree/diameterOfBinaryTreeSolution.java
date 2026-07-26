@@ -1,7 +1,7 @@
 // 导入必备的工具包
-import java.util.Scanner;
-import java.util.Queue;
 import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
 
 /*
 543.二叉树的直径
@@ -19,7 +19,7 @@ public class diameterOfBinaryTreeSolution {
     /**
      * 1. 节点类定义
      */
-    static class TreeNode {
+    private static class TreeNode {
         int val;             // 节点的值
         TreeNode left;       // 左孩子
         TreeNode right;      // 右孩子

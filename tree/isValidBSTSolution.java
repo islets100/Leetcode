@@ -1,8 +1,8 @@
 
 // 导入处理输入输出、队列和链表的工具类
-import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
 
 /*
 98.验证二叉搜索树
@@ -20,7 +20,7 @@ public class isValidBSTSolution {
     /**
      * 1. 节点类定义
      */
-    static class TreeNode {
+    private static class TreeNode {
         int val; // 节点存储的整数值
         TreeNode left; // 左子节点引用
         TreeNode right; // 右子节点引用
