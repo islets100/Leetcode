@@ -1,4 +1,4 @@
-```
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,9 +13,7 @@ public class InOut2 {
 		while (in.nextToken() != StreamTokenizer.TT_EOF) {
 			int num = (int) in.nval;
 			out.println(num);
-			out.flush();//刷新  
+			out.flush();// 刷新
 		}
 	}
 }
-
-```
