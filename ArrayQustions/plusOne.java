@@ -1,4 +1,4 @@
-package ArrayQustions; // 1. 这里必须跟文件夹名对齐
+package ArrayQustions; 
 
 import java.util.Arrays;
 import java.util.Scanner;
